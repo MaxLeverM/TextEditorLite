@@ -7,12 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <RichTextBox HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" VerticalAlignment="Top" Width="772">
+        <RichTextBox x:Name="mainTextBox" HorizontalAlignment="Left" Height="364" Margin="10,45,0,0" VerticalAlignment="Top" Width="772" FontFamily="Consolas" AcceptsTab="True" Block.LineHeight="2">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <StackPanel Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="772" Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="1">
+            <Button x:Name="newBtn" Content="Новый" Width="75" Margin="10,0"/>
+            <Button x:Name="loadBtn" Content="Загрузить" Width="75" Margin="10,0"/>
+            <Button x:Name="saveBtn" Content="Сохранить" Width="75" Margin="10,0"/>
+            <Button x:Name="saveAsBtn" Content="Сохранить как..." Margin="10,0"/>
+        </StackPanel>
     </Grid>
 </Window>
