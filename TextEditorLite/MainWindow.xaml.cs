@@ -20,9 +20,27 @@ namespace TextEditorLite
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TextFile textFile { get; set; }
+        private bool textIsModified = false;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadWindow loadWindow = new LoadWindow();
+            loadWindow.Owner = this;
+            if (loadWindow.ShowDialog() == true)
+            {
+                textFile = loadWindow.filesListBox.SelectedItem as TextFile;
+                mainTextBox.AppendText(textFile.Value);
+            }
+        }
+
+        private void MainTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }
