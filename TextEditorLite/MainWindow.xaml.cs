@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Drawing;
+using System.Text.RegularExpressions;
+using System.Windows;
+using FastColoredTextBoxNS;
 
 namespace TextEditorLite
 {
@@ -15,6 +15,9 @@ namespace TextEditorLite
         public MainWindow()
         {
             InitializeComponent();
+
+           // mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
+            mainTextBox.AutoIndent = true;
         }
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
@@ -49,6 +52,18 @@ namespace TextEditorLite
             {
                 textIsModified = true;
             }
+        }
+
+        FastColoredTextBoxNS.Style GreenStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Green, null, System.Drawing.FontStyle.Italic);
+        private void MainTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            e.ChangedRange.ClearStyle(GreenStyle);
+            e.ChangedRange.SetStyle(GreenStyle, @"//.*$", RegexOptions.Multiline);
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
