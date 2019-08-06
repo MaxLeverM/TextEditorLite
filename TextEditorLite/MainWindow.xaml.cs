@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Markup;
 
 namespace TextEditorLite
 {
@@ -34,13 +34,42 @@ namespace TextEditorLite
             if (loadWindow.ShowDialog() == true)
             {
                 textFile = loadWindow.filesListBox.SelectedItem as TextFile;
-                mainTextBox.AppendText(textFile.Value);
+                mainTextBox.SetText(textFile.Value);
+                textIsModified = false;
             }
         }
 
         private void MainTextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            textIsModified = true;
+        }
 
+        private void NewBtn_Click(object sender, RoutedEventArgs e)
+        {
+           /* if (!textIsModified)
+            {*/
+                textIsModified = false;
+                textFile = null;
+                mainTextBox.Document.Blocks.Clear();
+           /* }
+            else
+            {
+
+            }*/
+        }
+    }
+
+    public static class ExtRichTextBox
+    {
+        public static void SetText(this RichTextBox richTextBox, string text)
+        {
+            richTextBox.Document.Blocks.Clear();
+            richTextBox.Document.Blocks.Add(new Paragraph(new Run(text)));
+        }
+
+        public static string GetText(this RichTextBox richTextBox)
+        {
+            return new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
         }
     }
 }
