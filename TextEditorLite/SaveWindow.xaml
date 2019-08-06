@@ -1,0 +1,16 @@
+﻿<Window x:Class="TextEditorLite.SaveWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditorLite"
+        mc:Ignorable="d"
+        Title="Сохранить" Height="150" Width="400">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Новый файл" VerticalAlignment="Top" Width="372"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="372" TextAlignment="Center"><Run Text="Введите имя файла" Block.TextAlignment="Center"/><LineBreak/><Run/></TextBlock>
+        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="307,89,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
