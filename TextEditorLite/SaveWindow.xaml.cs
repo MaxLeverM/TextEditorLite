@@ -26,11 +26,22 @@ namespace TextEditorLite
             InitializeComponent();
             this.db = db;
             this.textFile = textFile;
-            nameTextBox.Text = textFile?.Name;
+            nameTextBox.Text = textFile?.Name??"NewFile";
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            textFile.Name = nameTextBox.Text;
+            if (textFile.ID == 0)
+            {
+                textFile.DateCreate = DateTime.Now.ToShortDateString();
+                db.TextFiles.Add(textFile);
+            }
+            else
+            {
+                db.Entry(textFile).State = System.Data.Entity.EntityState.Modified;
+            }
+            db.SaveChanges();
             DialogResult = true;
         }
 

@@ -82,6 +82,14 @@ namespace TextEditorLite
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (textFile == null)
+            {
+                textFile = new TextFile { Value = mainTextBox.Text };
+            }
+            else
+            {
+                textFile.Value = mainTextBox.Text;
+            }
             SaveWindow saveWindow = new SaveWindow(db,textFile);
             saveWindow.Owner = this;
             if (saveWindow.ShowDialog() == true)
