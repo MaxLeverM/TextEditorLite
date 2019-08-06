@@ -3,17 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fctb="clr-namespace:FastColoredTextBoxNS;assembly=FastColoredTextBox"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
         xmlns:local="clr-namespace:TextEditorLite"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#FFD4D4D4">
     <Grid>
-        <RichTextBox x:Name="mainTextBox" HorizontalAlignment="Left" Height="364" Margin="10,45,0,0" VerticalAlignment="Top" Width="772" FontFamily="Consolas" AcceptsTab="True" Block.LineHeight="2" KeyDown="MainTextBox_KeyDown">
+        <WindowsFormsHost Margin="5,35,5,5">
+            <fctb:FastColoredTextBox x:Name="mainTextBox"  Height="364" Margin="10,45,0,0"  Width="772"  AcceptsTab="True"  KeyDown="MainTextBox_KeyDown">
+            </fctb:FastColoredTextBox>
+        </WindowsFormsHost>
+       <!-- <RichTextBox x:Name="mainTextBox" HorizontalAlignment="Left" Height="364" Margin="10,45,0,0" VerticalAlignment="Top" Width="772" FontFamily="Consolas" AcceptsTab="True" Block.LineHeight="2" KeyDown="MainTextBox_KeyDown">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
-        </RichTextBox>
+        </RichTextBox> -->
         <StackPanel Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="772" Orientation="Horizontal" HorizontalAlignment="Left" MinWidth="1">
             <Button x:Name="newBtn" Content="Новый" Width="75" Margin="10,0" RenderTransformOrigin="0.5,0.5" Click="NewBtn_Click"/>
             <Button x:Name="loadBtn" Content="Загрузить" Width="75" Margin="10,0" Click="LoadBtn_Click"/>
