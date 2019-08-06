@@ -18,9 +18,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel HorizontalAlignment="Left" Height="36" Margin="10,373,0,0" VerticalAlignment="Top" Width="772" Orientation="Horizontal">
-            <Button x:Name="OpenBtn" Content="Открыть" Width="74" Click="OpenBtn_Click" IsDefault="True"/>
+            <Button x:Name="OpenBtn" Content="Открыть" Width="74" Click="OpenBtn_Click" IsDefault="True" Margin="5,0,0,0"/>
             <Button x:Name="DeleteBtn" Content="Удалить" Width="75" Margin="50,0,0,0" Click="DeleteBtn_Click"/>
-            <Button x:Name="CancelBtn" Content="Отменить" Width="74" Height="35" Margin="500,0,0,0" IsCancel="True" Click="CancelBtn_Click"/>
+            <Button x:Name="CancelBtn" Content="Отменить" Width="74" Height="35" Margin="490,0,10,0" IsCancel="True" Click="CancelBtn_Click"/>
         </StackPanel>
     </Grid>
 </Window>

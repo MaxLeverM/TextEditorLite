@@ -28,6 +28,24 @@ namespace TextEditorLite
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!textIsModified)
+            {
+                CreateLoadWindow();
+            }
+            else
+            {
+                if (askSaveFile())
+                {
+                    SaveBtn_Click(this, new RoutedEventArgs());
+                }
+                else
+                {
+                    CreateLoadWindow();
+                }
+            }
+        }
+        private void CreateLoadWindow()
+        {
             LoadWindow loadWindow = new LoadWindow(db);
             loadWindow.Owner = this;
             if (loadWindow.ShowDialog() == true)
@@ -46,16 +64,30 @@ namespace TextEditorLite
             }
             else
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Сохранить файл?", "Внимание", MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)
+                if (askSaveFile())
                 {
                     SaveBtn_Click(this, new RoutedEventArgs());
                 }
-                else if (messageBoxResult == MessageBoxResult.No)
+                else
                 {
                     VarToDefault();
                 }
             }
+        }
+
+        private bool askSaveFile()
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Сохранить файл?", "Внимание", MessageBoxButton.YesNo);
+            bool result = false;
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                result = true;
+            }
+            else if (messageBoxResult == MessageBoxResult.No)
+            {
+                result = false;
+            }
+            return result;
         }
 
         private void VarToDefault()
@@ -90,7 +122,7 @@ namespace TextEditorLite
             {
                 textFile.Value = mainTextBox.Text;
             }
-            SaveWindow saveWindow = new SaveWindow(db,textFile);
+            SaveWindow saveWindow = new SaveWindow(db, textFile);
             saveWindow.Owner = this;
             if (saveWindow.ShowDialog() == true)
             {
