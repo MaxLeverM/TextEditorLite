@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="Сохранить" Height="150" Width="400">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Новый файл" VerticalAlignment="Top" Width="372"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Новый файл" VerticalAlignment="Top" Width="372"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="372" TextAlignment="Center"><Run Text="Введите имя файла" Block.TextAlignment="Center"/><LineBreak/><Run/></TextBlock>
-        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="307,89,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="saveBtn" Content="Сохранить" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75" Click="SaveBtn_Click"/>
+        <Button x:Name="cancelBtn" Content="Отмена" HorizontalAlignment="Left" Margin="307,89,0,0" VerticalAlignment="Top" Width="75" Click="CancelBtn_Click"/>
 
     </Grid>
 </Window>

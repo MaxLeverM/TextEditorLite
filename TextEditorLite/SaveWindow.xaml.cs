@@ -19,9 +19,24 @@ namespace TextEditorLite
     /// </summary>
     public partial class SaveWindow : Window
     {
-        public SaveWindow()
+        ApplicationContext db;
+        TextFile textFile;
+        public SaveWindow(ApplicationContext db, TextFile textFile)
         {
             InitializeComponent();
+            this.db = db;
+            this.textFile = textFile;
+            nameTextBox.Text = textFile?.Name;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

@@ -5,13 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TextEditorLite
 {
@@ -21,12 +14,11 @@ namespace TextEditorLite
     public partial class LoadWindow : Window
     {
         ApplicationContext db;
-        public LoadWindow()
+        public LoadWindow(ApplicationContext db)
         {
             InitializeComponent();
 
-            db = new ApplicationContext();
-            db.TextFiles.Load();
+            this.db = db;
             this.DataContext = db.TextFiles.Local.ToBindingList();
         }
 
@@ -45,6 +37,15 @@ namespace TextEditorLite
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (filesListBox.SelectedItem != null)
+            {
+                db.TextFiles.Remove(filesListBox.SelectedItem as TextFile);
+                db.SaveChanges();
+            }
         }
     }
 }

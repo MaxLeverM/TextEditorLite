@@ -7,7 +7,7 @@
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
         xmlns:local="clr-namespace:TextEditorLite"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FFD4D4D4">
+        Title="TextEditorLite" Height="450" Width="800" Background="#FFD4D4D4">
     <Grid>
         <WindowsFormsHost Margin="5,35,5,5">
             <fctb:FastColoredTextBox x:Name="mainTextBox"  Height="364" Margin="10,45,0,0"  Width="772"  AcceptsTab="True"  KeyDown="MainTextBox_KeyDown" TextChanged="MainTextBox_TextChanged">

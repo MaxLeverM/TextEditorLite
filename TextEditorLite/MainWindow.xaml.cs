@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Data.Entity;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows;
 using FastColoredTextBoxNS;
@@ -10,19 +11,24 @@ namespace TextEditorLite
     /// </summary>
     public partial class MainWindow : Window
     {
+        ApplicationContext db;
         public TextFile textFile { get; set; }
         private bool textIsModified = false;
+
         public MainWindow()
         {
             InitializeComponent();
 
-           // mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
+            db = new ApplicationContext();
+            db.TextFiles.Load();
+
+            // mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
             mainTextBox.AutoIndent = true;
         }
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            LoadWindow loadWindow = new LoadWindow();
+            LoadWindow loadWindow = new LoadWindow(db);
             loadWindow.Owner = this;
             if (loadWindow.ShowDialog() == true)
             {
@@ -34,16 +40,29 @@ namespace TextEditorLite
 
         private void NewBtn_Click(object sender, RoutedEventArgs e)
         {
-           /* if (!textIsModified)
-            {*/
-                textIsModified = false;
-                textFile = null;
-                mainTextBox.Clear();
-           /* }
+            if (!textIsModified)
+            {
+                VarToDefault();
+            }
             else
             {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Сохранить файл?", "Внимание", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    SaveBtn_Click(this, new RoutedEventArgs());
+                }
+                else if (messageBoxResult == MessageBoxResult.No)
+                {
+                    VarToDefault();
+                }
+            }
+        }
 
-            }*/
+        private void VarToDefault()
+        {
+            textIsModified = false;
+            textFile = null;
+            mainTextBox.Clear();
         }
 
         private void MainTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -63,7 +82,12 @@ namespace TextEditorLite
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            SaveWindow saveWindow = new SaveWindow(db,textFile);
+            saveWindow.Owner = this;
+            if (saveWindow.ShowDialog() == true)
+            {
+                textIsModified = false;
+            }
         }
     }
 }
