@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
-//using Ionic.Zip;
+using Ionic.Zip;
 
 namespace TextEditorLite
 {
@@ -12,8 +11,9 @@ namespace TextEditorLite
         {
             byte[] buffer = Encoding.UTF8.GetBytes(text);
             var memoryStream = new MemoryStream();
-            using (var gZipStream = new GZipStream(memoryStream, CompressionMode.Compress, true))
+            using (var gZipStream = new ZipOutputStream(memoryStream, true))
             {
+                gZipStream.PutNextEntry("value");
                 gZipStream.Write(buffer, 0, buffer.Length);
             }
 
@@ -39,8 +39,9 @@ namespace TextEditorLite
                 var buffer = new byte[dataLength];
 
                 memoryStream.Position = 0;
-                using (var gZipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                using (var gZipStream = new ZipInputStream(memoryStream))
                 {
+                    gZipStream.GetNextEntry();
                     gZipStream.Read(buffer, 0, buffer.Length);
                 }
 
