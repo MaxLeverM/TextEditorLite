@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using Ionic.Zip;
+//using Ionic.Zip;
 
 namespace TextEditorLite
 {

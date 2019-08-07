@@ -22,7 +22,6 @@ namespace TextEditorLite
             db = new ApplicationContext();
             DBhandler.LoadFromDB(db);
 
-            // mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
             mainTextBox.AutoIndent = true;
         }
 
@@ -51,6 +50,7 @@ namespace TextEditorLite
             if (loadWindow.ShowDialog() == true)
             {
                 textFile = loadWindow.filesListBox.SelectedItem as TextFile;
+                CheckFileFormat(textFile.Name);
                 mainTextBox.Text = ZipHandler.Unzip(textFile.Value);
                 textIsModified = false;
             }
@@ -95,15 +95,15 @@ namespace TextEditorLite
             textIsModified = false;
             textFile = null;
             mainTextBox.Clear();
+            mainTextBox.Language = FastColoredTextBoxNS.Language.Custom;
+            mainTextBox.ClearStyle(StyleIndex.All);
         }
 
         private void MainTextBox_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (!textIsModified)
-            {
-                textIsModified = true;
-            }
+            if (!textIsModified) { textIsModified = true; }
         }
+
 
         FastColoredTextBoxNS.Style GreenStyle = new FastColoredTextBoxNS.TextStyle(Brushes.Green, null, System.Drawing.FontStyle.Italic);
         private void MainTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -127,6 +127,40 @@ namespace TextEditorLite
             if (saveWindow.ShowDialog() == true)
             {
                 textIsModified = false;
+                CheckFileFormat(textFile.Name);
+            }
+        }
+
+        private void CheckFileFormat(string fileName)
+        {
+            string patternStr = @"\.(\w*)$";
+            if (fileName != null)
+            {
+                if (Regex.IsMatch(fileName, patternStr, RegexOptions.IgnoreCase))
+                {
+                    string formatStr = Regex.Match(fileName, patternStr, RegexOptions.IgnoreCase).Value;
+                    SetTextFormatting(formatStr);
+                }
+                else
+                {
+                    SetTextFormatting("");
+                }
+            }
+        }
+
+        private void SetTextFormatting(string formatStr)
+        {
+            switch (formatStr)
+            {
+                case ".xml":
+                    mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
+                    break;
+                case ".json":
+                    mainTextBox.Language = FastColoredTextBoxNS.Language.JS;
+                    break;
+                default:
+                    mainTextBox.Language = FastColoredTextBoxNS.Language.Custom;
+                    break;
             }
         }
     }

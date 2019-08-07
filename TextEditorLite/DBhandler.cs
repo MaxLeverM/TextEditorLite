@@ -11,11 +11,27 @@ namespace TextEditorLite
     {
         public static async void LoadFromDB(ApplicationContext db)
         {
-            await db.TextFiles.LoadAsync();
+            try
+            {
+                await db.TextFiles.LoadAsync();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
         public static async void SaveToDB(ApplicationContext db)
         {
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
