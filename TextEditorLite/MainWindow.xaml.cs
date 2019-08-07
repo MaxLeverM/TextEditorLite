@@ -123,7 +123,7 @@ namespace TextEditorLite
                 textFile.Value = ZipHandler.Zip(mainTextBox.Text);
             }
             SaveWindow saveWindow = new SaveWindow(db, textFile);
-            saveWindow.Owner = this;
+            saveWindow.Owner = this;        
             if (saveWindow.ShowDialog() == true)
             {
                 textIsModified = false;
@@ -161,7 +161,7 @@ namespace TextEditorLite
                 default:
                     mainTextBox.Language = FastColoredTextBoxNS.Language.Custom;
                     break;
-            }
+            } 
         }
     }
 }
