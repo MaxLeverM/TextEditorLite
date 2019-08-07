@@ -91,6 +91,7 @@
       <DependentUpon>SaveWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextFile.cs" />
+    <Compile Include="ZipHandler.cs" />
     <Page Include="LoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

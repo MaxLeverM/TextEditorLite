@@ -51,7 +51,7 @@ namespace TextEditorLite
             if (loadWindow.ShowDialog() == true)
             {
                 textFile = loadWindow.filesListBox.SelectedItem as TextFile;
-                mainTextBox.Text = textFile.Value;
+                mainTextBox.Text = ZipHandler.Unzip(textFile.Value);
                 textIsModified = false;
             }
         }
@@ -116,11 +116,11 @@ namespace TextEditorLite
         {
             if (textFile == null)
             {
-                textFile = new TextFile { Value = mainTextBox.Text };
+                textFile = new TextFile { Value = ZipHandler.Zip(mainTextBox.Text) };
             }
             else
             {
-                textFile.Value = mainTextBox.Text;
+                textFile.Value = ZipHandler.Zip(mainTextBox.Text);
             }
             SaveWindow saveWindow = new SaveWindow(db, textFile);
             saveWindow.Owner = this;
