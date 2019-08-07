@@ -44,7 +44,7 @@ namespace TextEditorLite
                 db.TextFiles.Add(textFile);
             }
 
-            db.SaveChanges();
+            DBhandler.SaveToDB(db);
             DialogResult = true;
         }
 

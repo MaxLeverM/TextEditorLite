@@ -44,7 +44,7 @@ namespace TextEditorLite
             if (filesListBox.SelectedItem != null)
             {
                 db.TextFiles.Remove(filesListBox.SelectedItem as TextFile);
-                db.SaveChanges();
+                DBhandler.SaveToDB(db);
             }
         }
     }

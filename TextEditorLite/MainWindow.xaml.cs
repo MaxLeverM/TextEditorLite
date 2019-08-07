@@ -20,7 +20,7 @@ namespace TextEditorLite
             InitializeComponent();
 
             db = new ApplicationContext();
-            db.TextFiles.Load();
+            DBhandler.LoadFromDB(db);
 
             // mainTextBox.Language = FastColoredTextBoxNS.Language.XML;
             mainTextBox.AutoIndent = true;
