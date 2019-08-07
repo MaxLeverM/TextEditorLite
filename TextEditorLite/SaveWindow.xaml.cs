@@ -40,7 +40,7 @@ namespace TextEditorLite
             }
             else
             {
-                textFile.DateCreate = DateTime.Now.ToShortDateString();
+                textFile.DateCreate = DateTime.Now.ToLongDateString();
                 db.TextFiles.Add(textFile);
             }
 
